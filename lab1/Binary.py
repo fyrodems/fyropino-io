@@ -1,12 +1,13 @@
 import pygad
 import numpy
 
+# Przestrzeń genów określająca możliwe wartości dla każdego genu
 gene_space = numpy.arange(0.00, 1.01, 1.00)
 
-# w celu ułatwienia wektor to już odwrócona liczba binarna, S to wynik idealny
+# Wektor reprezentowany jako odwrócona liczba binarna, S to wynik idealny
 S = [1, 1, 1, 1, 1, 1, 1, 0]
 
-
+# Funkcja zamieniająca odwrócone liczby binarne na wartość dziesiętną
 def to_decimal(number, power):
     if power == 7 and number == 1:
         return -128
@@ -16,7 +17,7 @@ def to_decimal(number, power):
         else:
             return 2**power
 
-
+# Funkcja fitness oceniająca jakość rozwiązania
 def fitness(ga_instance, solution, ids):
     i = 0
     result = 0
@@ -27,9 +28,8 @@ def fitness(ga_instance, solution, ids):
 
     return result
 
-
+# Ustawienia algorytmu genetycznego
 fitness_function = fitness
-
 sol_per_pop = 5
 num_genes = 8
 num_parents_mating = 5
@@ -40,6 +40,7 @@ crossover_type = "single_point"
 mutation_type = "random"
 mutation_percent_genes = 12.5
 
+# Inicjalizacja instancji algorytmu genetycznego
 ga_instance = pygad.GA(gene_space=gene_space,
                        num_generations=num_generations,
                        num_parents_mating=num_parents_mating,
@@ -52,15 +53,21 @@ ga_instance = pygad.GA(gene_space=gene_space,
                        mutation_type=mutation_type,
                        mutation_percent_genes=mutation_percent_genes)
 
+# Uruchomienie algorytmu genetycznego
 ga_instance.run()
 
+# Pobranie najlepszego rozwiązania
 solution, solution_fitness, solution_idx = ga_instance.best_solution()
-print("Parameters of the best solution : {solution}".format(solution=solution))
-print("Fitness value of the best solution = {solution_fitness}".format(
+
+# Wyświetlenie parametrów najlepszego rozwiązania
+print("Parametry najlepszego rozwiązania: {solution}".format(solution=solution))
+print("Wartość funkcji fitness najlepszego rozwiązania = {solution_fitness}".format(
     solution_fitness=solution_fitness))
 
+# Przykładowe przewidywane wyjście na podstawie najlepszego rozwiązania
 prediction = 127
-print("Predicted output based on the best solution : {prediction}".format(
+print("Przewidywane wyjście na podstawie najlepszego rozwiązania: {prediction}".format(
     prediction=prediction))
 
+# Wyświetlenie wykresu ewolucji funkcji fitness w czasie
 ga_instance.plot_fitness()
