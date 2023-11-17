@@ -30,7 +30,6 @@ S = [("Chemia Organiczna", 7, 55),
     ("Teoria Liczb", 5, 80),
     ("Teoria Koloru", 3, 35)]
 
-
 maxWeight = 500
 
 def fitness_func(ga_instance, solution, solution_idx):
@@ -38,16 +37,13 @@ def fitness_func(ga_instance, solution, solution_idx):
     for (i, v) in enumerate(solution):
         if v == 1:
             takes.append(S[i])
-    sumWeight = numpy.sum(v[2] for v in takes)
-    sumValue1 = numpy.sum(v[1] for v in takes)
+    sumWeight = numpy.sum(item[2] for item in takes)
+    sumValue1 = numpy.sum(item[1] for item in takes)
     if (sumWeight > maxWeight):
         fitness = 0
         return fitness
     fitness = sumValue1
     return fitness
-    # zgodnosc = numpy.sum(preferencje_nauczycieli[:, solution])
-    # return zgodnosc
-
 
 fitness_function = fitness_func
 
@@ -61,9 +57,7 @@ num_generations = 30
 keep_parents = 1
 
 parent_selection_type = "sss"
-
 crossover_type = "single_point"
-
 mutation_type = "random"
 mutation_percent_genes = 10
 
@@ -80,7 +74,6 @@ ga_instance = pygad.GA(gene_space=gene_space,
                        mutation_percent_genes=mutation_percent_genes)
 
 ga_instance.run()
-
 
 solution, solution_fitness, solution_idx = ga_instance.best_solution()
 
