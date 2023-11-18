@@ -1,6 +1,7 @@
 import pygad
 import numpy
 
+# Definicja zestawu danych - przedmiotów (nazwa, waga, wartość)
 S = [("Chemia Organiczna", 7, 55),
     ("Statystyka", 3, 85),
     ("Logika", 6, 95),
@@ -32,35 +33,38 @@ S = [("Chemia Organiczna", 7, 55),
 
 maxWeight = 500
 
+# Funkcja fitness - ocenia jakość rozwiązania na podstawie wartości przedmiotów
 def fitness_func(ga_instance, solution, solution_idx):
     takes = []
     for (i, v) in enumerate(solution):
         if v == 1:
             takes.append(S[i])
     sumWeight = numpy.sum(item[2] for item in takes)
-    sumValue1 = numpy.sum(item[1] for item in takes)
+    sumValue = numpy.sum(item[1] for item in takes)
     if (sumWeight > maxWeight):
         fitness = 0
         return fitness
-    fitness = sumValue1
+    fitness = sumValue
     return fitness
 
+# Przypisanie funkcji fitness do zmiennej fitness_function
 fitness_function = fitness_func
 
+# Przestrzeń genów - chromosomy to listy binarne
 gene_space = [0, 1]
 
+# Parametry algorytmu genetycznego
 sol_per_pop = 20
 num_genes = len(S)
-
 num_parents_mating = 5
 num_generations = 30
 keep_parents = 1
-
 parent_selection_type = "sss"
 crossover_type = "single_point"
 mutation_type = "random"
 mutation_percent_genes = 10
 
+# Inicjalizacja instancji algorytmu genetycznego
 ga_instance = pygad.GA(gene_space=gene_space,
                        num_generations=num_generations,
                        num_parents_mating=num_parents_mating,
@@ -73,10 +77,13 @@ ga_instance = pygad.GA(gene_space=gene_space,
                        mutation_type=mutation_type,
                        mutation_percent_genes=mutation_percent_genes)
 
+# Uruchomienie algorytmu genetycznego
 ga_instance.run()
 
+# Pobranie najlepszego rozwiązania
 solution, solution_fitness, solution_idx = ga_instance.best_solution()
 
+# Wypisanie nazw wybranych przedmiotów w optymalnym rozwiązaniu
 value = 0
 for (i, v) in enumerate(solution):
     if v == 1:
@@ -84,4 +91,5 @@ for (i, v) in enumerate(solution):
         print(S[i][0])
 print(value)
 
+# Wygenerowanie wykresu przedstawiającego ewolucję wartości fitness w kolejnych generacjach
 ga_instance.plot_fitness()
