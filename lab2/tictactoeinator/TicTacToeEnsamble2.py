@@ -2,9 +2,18 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
+from tkinter import filedialog
+import tkinter as tk
 
-# Wczytanie danych
-df = pd.read_csv("ttt.csv")
+# Okno dialogowe do wyboru pliku
+root = tk.Tk()
+root.withdraw()  # Ukrycie głównego okna
+
+# Wybór pliku za pomocą okna dialogowego
+file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pliki CSV", "*.csv")])
+
+# Wczytanie danych z wybranego pliku
+df = pd.read_csv(file_path)
 
 # Podział na zbiór treningowy i testowy
 # Ustawienie train_size na 0.65 oznacza, że 65% danych zostanie użyte do treningu, a 35% do testowania.
