@@ -5,10 +5,6 @@ from sklearn.metrics import confusion_matrix
 from tkinter import filedialog
 import tkinter as tk
 
-# Poniżej jest kod, który odpali program 50 razy i zliczy ile razy było powyżej 90%
-# Zlicza też średnią dokładność i ilość wyników powyżej i poniżej 90%
-# W celach testowych można zakomentować jeden skrypt i odkomentować drugi
-
 # Okno dialogowe do wyboru pliku
 root = tk.Tk()
 root.withdraw()  # Ukrycie głównego okna
@@ -28,15 +24,16 @@ df = pd.read_csv(file_path)
 X = train_set[:, [0, 1, 2, 3, 4, 5, 6, 7, 8]]
 y = train_set[:, [9]]
 
-# Utworzenie i dopasowanie modelu MLP
-# Utworzenie instancji MLPClassifier
+# Utworzenie i dopasowanie modelu MLP (Multi-layer Perceptron)
+# Utworzenie instancji MLPClassifier z jedną warstwą ukrytą (hidden layer) zawierającą 200 neuronów
+# max_iter określa maksymalną liczbę iteracji (epok), aby zapobiec zbyt długiemu trenowaniu
 mlp = MLPClassifier(hidden_layer_sizes=(200,), max_iter=3000)
 
 # Dopasowanie modelu do danych treningowych
 mlp.fit(X, y.ravel())  # ravel() do spłaszczenia listy
 
 # Ocena dokładności na zbiorze testowym
-Xtest = test_set[:, [0, 1, 2, 3, 4, 5, 6, 7, 8]]
+Xtest = test_set[:, :9]
 Ytest = test_set[:, [9]]
 print(f'Dokładność na zbiorze testowym: {mlp.score(Xtest, Ytest)}')
 
