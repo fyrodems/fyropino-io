@@ -2,9 +2,22 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix
+from tkinter import filedialog
+import tkinter as tk
 
-# Wczytaj dane
-df = pd.read_csv("../ttt.csv")
+# Okno dialogowe do wyboru pliku
+root = tk.Tk()
+root.withdraw()  # Ukrycie głównego okna
+
+# Wybór pliku za pomocą okna dialogowego
+file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pliki CSV", "*.csv")])
+
+# Wczytanie danych z wybranego pliku
+df = pd.read_csv(file_path)
+
+# Poniżej jest kod, który odpali program 50 razy i zliczy ile razy było powyżej 90
+# Zlicza też średnią dokładności i ilość wyników powyżej i poniżej 90%
+# W celach testowych można zakomentować powyższy kod i odkomentować poniższy
 
 # Utwórz plik do logów
 log_file_path = "TicTacToeNeutralNetwork_logs.txt"
