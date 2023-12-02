@@ -1,4 +1,4 @@
-pregnant-times,glucose-concentr,blood-pressure,skin-thickness,insulin,mass-index,pedigree-func,age,class
+preg,plas,pres,skin,insu,mass,pedi,age,class
 6,148,72,35,0,33.6,0.627,50,tested_positive
 1,85,66,29,0,26.6,0.351,31,tested_negative
 8,183,64,0,0,23.3,0.672,32,tested_positive
