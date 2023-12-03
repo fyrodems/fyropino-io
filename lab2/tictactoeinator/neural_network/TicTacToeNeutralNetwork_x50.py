@@ -15,10 +15,6 @@ file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pl
 # Wczytanie danych z wybranego pliku
 df = pd.read_csv(file_path)
 
-# Poniżej jest kod, który odpali program 50 razy i zliczy ile razy było powyżej 90
-# Zlicza też średnią dokładności i ilość wyników powyżej i poniżej 90%
-# W celach testowych można zakomentować powyższy kod i odkomentować poniższy
-
 # Utwórz plik do logów
 log_file_path = "TicTacToeNeutralNetwork_logs.txt"
 with open(log_file_path, "w") as log_file:
