@@ -5,6 +5,10 @@ from sklearn.metrics import confusion_matrix
 from tkinter import filedialog
 import tkinter as tk
 
+# Poniżej jest drugi skrypt, który odpali program 50 razy
+# Zlicza średnią dokładność i ilość wyników powyżej i poniżej 90%
+# W celach testowych można zakomentować powyższy kod i odkomentować poniższy
+
 # Okno dialogowe do wyboru pliku
 root = tk.Tk()
 root.withdraw()  # Ukrycie głównego okna
@@ -65,7 +69,7 @@ print(f'Macierz błędów:\n{confusion_matrix(Ytest, predictions)}')
 #     y = train_set[:, 9]
 #
 #     # Utworzenie i dopasowanie modelu MLP
-#     mlp = MLPClassifier(hidden_layer_sizes=(200,), max_iter=3000)
+#     mlp = MLPClassifier(hidden_layer_sizes=(200,), max_iter=4000)
 #     mlp.fit(X, y.ravel())
 #
 #     # Ocena dokładności na zbiorze testowym
