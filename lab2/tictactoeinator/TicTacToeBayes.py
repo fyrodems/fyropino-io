@@ -4,8 +4,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix
 
 df = pd.read_csv("ttt.csv")
-(train_set, test_set) = train_test_split(df.values, train_size=0.66,
-                                         random_state=40)
+(train_set, test_set) = train_test_split(df.values, train_size=0.6,
+                                         random_state=100)
 
 X = train_set[:, [0, 1, 2, 3, 4, 5, 6, 7, 8]]
 y = train_set[:, [9]]
