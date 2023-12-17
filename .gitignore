@@ -3,3 +3,5 @@
 *.png
 *.svg
 *.pdf
+.gif
+.log
