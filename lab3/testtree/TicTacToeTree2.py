@@ -29,7 +29,7 @@ print(f'Dokładność: {accuracy}')
 # Rysowanie wykresu drzewa decyzyjnego i zapis do pliku SVG
 plt.figure(figsize=(15, 10))
 plot_tree(final_clf, filled=True, feature_names=X.columns, class_names=final_clf.classes_)
-plt.savefig("tree_plot.svg")
+# plt.savefig("tree_plot.svg")
 plt.show()
 
 # Rysowanie wykresu błędu vs Głębokość drzewa i zapis do pliku SVG
@@ -49,5 +49,5 @@ plt.title('Dokładność vs Głębokość Drzewa Decyzyjnego')
 plt.xlabel('Głębokość Drzewa')
 plt.ylabel('Dokładność')
 plt.grid(True)
-plt.savefig("accuracy_vs_depth_plot.svg")
+# plt.savefig("accuracy_vs_depth_plot.svg")
 plt.show()

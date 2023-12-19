@@ -16,7 +16,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Krok 4: Inicjalizacja ostatecznego klasyfikatora z najlepszą maksymalną głębokością
 best_max_depth = 10  # Ustawienie najlepszej głębokości
-final_clf = DecisionTreeClassifier(max_depth=best_max_depth)
+final_clf = DecisionTreeClassifier(max_depth=best_max_depth, random_state=100)
 final_clf.fit(X_train, y_train)
 
 # Krok 5: Przewidywanie na zbiorze testowym
@@ -29,6 +29,7 @@ print(f'Dokładność: {accuracy}')
 # Krok 7: Rysowanie wykresu drzewa decyzyjnego i zapis do pliku SVG
 plt.figure(figsize=(15, 10))
 plot_tree(final_clf, filled=True, feature_names=X.columns, class_names=final_clf.classes_)
+plt.title('Drzewo Decyzyjne')
 plt.savefig("tree_plot.svg")
 plt.show()
 
@@ -38,7 +39,7 @@ accuracies = []
 
 for depth in max_depths:
     # Tworzenie klasyfikatora dla różnych głębokości drzewa
-    clf = DecisionTreeClassifier(max_depth=depth)
+    clf = DecisionTreeClassifier(max_depth=depth, random_state=100)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
