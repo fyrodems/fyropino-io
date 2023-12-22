@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix, classification_report
 
 # Krok 1: Wczytanie danych z pliku CSV
 df = pd.read_csv("ttt.csv")
@@ -26,11 +27,19 @@ y_pred = final_clf.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f'Dokładność: {accuracy}')
 
+# Wyświetlanie matrycy konfuzji i raportu klasyfikacji
+conf_matrix = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(conf_matrix)
+
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
 # Krok 7: Rysowanie wykresu drzewa decyzyjnego i zapis do pliku SVG
 plt.figure(figsize=(15, 10))
 plot_tree(final_clf, filled=True, feature_names=X.columns, class_names=final_clf.classes_)
 plt.title('Drzewo Decyzyjne')
-plt.savefig("tree_plot.svg")
+# plt.savefig("tree_plot.svg")
 plt.show()
 
 # Krok 8: Rysowanie wykresu błędu vs Głębokość drzewa i zapis do pliku SVG
@@ -54,5 +63,7 @@ plt.title('Dokładność vs Głębokość Drzewa Decyzyjnego')
 plt.xlabel('Głębokość Drzewa')
 plt.ylabel('Dokładność')
 plt.grid(True)
-plt.savefig("accuracy_vs_depth_plot.svg")
+# plt.savefig("accuracy_vs_depth_plot.svg")
 plt.show()
+
+
