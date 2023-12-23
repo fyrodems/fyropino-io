@@ -1,4 +1,3 @@
-# Importowanie niezbędnych bibliotek
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -21,14 +20,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # y_train: etykiety zbioru treningowego
 # y_test: etykiety zbioru testowego
 # test_size=0.2: 20% danych zostanie użyte jako zbiór testowy
-# random_state=100: zapewnia powtarzalność wyników
 
 # Ustalenie optymalnej głębokości drzewa decyzyjnego
-best_max_depth = 10  # Optymalna głębokość drzewa decyzyjnego
-final_clf = DecisionTreeClassifier(max_depth=best_max_depth, random_state=100)
+final_clf = DecisionTreeClassifier(max_depth=10, random_state=100)
 # DecisionTreeClassifier: klasa do tworzenia modelu drzewa decyzyjnego
 # max_depth=best_max_depth: ustala maksymalną głębokość drzewa, aby uniknąć przetrenowania
-# random_state=100: zapewnia powtarzalność wyników
 
 # Trenowanie ostatecznego modelu na zbiorze treningowym
 final_clf.fit(X_train, y_train)
@@ -73,7 +69,7 @@ plt.title('Drzewo Decyzyjne')
 # class_names=final_clf.classes_: nazwy klas
 
 # Ewaluacja dokładności w zależności od głębokości drzewa decyzyjnego
-max_depths = range(1, 21)
+max_depths = range(1, 16)
 accuracies = []
 
 # Dla każdej głębokości drzewa, trenuj model, dokonaj predykcji i oblicz dokładność
@@ -88,13 +84,21 @@ for depth in max_depths:
 # Rysowanie wykresu dokładności w zależności od głębokości drzewa decyzyjnego
 plt.figure(figsize=(10, 6))
 plt.plot(max_depths, accuracies, marker='o')
-plt.title('Dokładność vs Głębokość Drzewa Decyzyjnego')
-plt.xlabel('Głębokość Drzewa')
-plt.ylabel('Dokładność')
-plt.grid(True)
-# plt.savefig("accuracy_vs_depth_plot.svg")
-plt.show()
 # plot(): rysuje wykres
 # max_depths: lista głębokości drzewa
 # accuracies: lista dokładności dla każdej głębokości
 # marker='o': oznacza punkty na wykresie
+
+plt.title('Dokładność vs Głębokość Drzewa Decyzyjnego')
+plt.xlabel('Głębokość Drzewa')
+plt.ylabel('Dokładność')
+plt.grid(True)
+
+# Oczekujemy zobaczenia, jak dokładność modelu zmienia się wraz ze wzrostem głębokości drzewa.
+# Optymalna głębokość powinna być taka, która daje dobrą dokładność bez przetrenowania modelu.
+
+# Patrząc na wykres, możemy zauważyć, że punkt, w którym dokładność jest odpowiednio wysoka i nie rośnie dalej równa się 10
+# Z tego względu w klasie DecisionTreeClassifier ustawiono max_depth na 10
+
+# plt.savefig("accuracy_vs_depth_plot.svg")
+plt.show()
