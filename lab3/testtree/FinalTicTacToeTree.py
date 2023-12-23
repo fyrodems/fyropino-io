@@ -1,3 +1,4 @@
+# Importowanie niezbędnych bibliotek
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -5,58 +6,86 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix, classification_report
 
-# Krok 1: Wczytanie danych z pliku CSV
+# Wczytywanie danych z pliku CSV
 df = pd.read_csv("ttt.csv")
 
-# Krok 2: Podział danych na cechy (X) i zmienną wynikową (y)
+# Podział danych na cechy (X) i etykiety (y)
 X = df.drop('result', axis=1)
 y = df['result']
 
-# Krok 3: Podział zbioru na dane treningowe i testowe
+# Podział danych na zbiory treningowy i testowy z użyciem funkcji train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=100)
+# train_test_split dzieli dane na zbiór treningowy i testowy
+# X_train: cechy zbioru treningowego
+# X_test: cechy zbioru testowego
+# y_train: etykiety zbioru treningowego
+# y_test: etykiety zbioru testowego
+# test_size=0.2: 20% danych zostanie użyte jako zbiór testowy
+# random_state=100: zapewnia powtarzalność wyników
 
-# Krok 4: Inicjalizacja ostatecznego klasyfikatora z najlepszą maksymalną głębokością
-best_max_depth = 10  # Ustawienie najlepszej głębokości
+# Ustalenie optymalnej głębokości drzewa decyzyjnego
+best_max_depth = 10  # Optymalna głębokość drzewa decyzyjnego
 final_clf = DecisionTreeClassifier(max_depth=best_max_depth, random_state=100)
+# DecisionTreeClassifier: klasa do tworzenia modelu drzewa decyzyjnego
+# max_depth=best_max_depth: ustala maksymalną głębokość drzewa, aby uniknąć przetrenowania
+# random_state=100: zapewnia powtarzalność wyników
+
+# Trenowanie ostatecznego modelu na zbiorze treningowym
 final_clf.fit(X_train, y_train)
+# fit(): trenuje model na danych treningowych
+# X_train: cechy zbioru treningowego
+# y_train: etykiety zbioru treningowego
 
-# Krok 5: Przewidywanie na zbiorze testowym
+# Predykcja na zbiorze testowym
 y_pred = final_clf.predict(X_test)
+# predict(): dokonuje predykcji na danych testowych
+# X_test: cechy zbioru testowego
 
-# Krok 6: Obliczanie i wyświetlanie dokładności
+# Obliczenie i wyświetlenie dokładności modelu
 accuracy = accuracy_score(y_test, y_pred)
-print(f'Dokładność: {accuracy}')
+print(f'Dokładność modelu: {accuracy}')
+# accuracy_score(): oblicza dokładność modelu
+# y_test: rzeczywiste etykiety
+# y_pred: przewidziane etykiety
 
-# Wyświetlanie matrycy konfuzji i raportu klasyfikacji
+# Obliczenie i wyświetlenie macierzy pomyłek
 conf_matrix = confusion_matrix(y_test, y_pred)
-print("Confusion Matrix:")
+print("Macierz pomyłek:")
 print(conf_matrix)
+# confusion_matrix(): tworzy macierz pomyłek
+# y_test: rzeczywiste etykiety
+# y_pred: przewidziane etykiety
 
-print("\nClassification Report:")
+# Wyświetlenie raportu klasyfikacyjnego
+print("\nRaport klasyfikacyjny:")
 print(classification_report(y_test, y_pred))
+# classification_report(): tworzy raport klasyfikacyjny
+# y_test: rzeczywiste etykiety
+# y_pred: przewidziane etykiety
 
-# Krok 7: Rysowanie wykresu drzewa decyzyjnego i zapis do pliku SVG
+# Rysowanie drzewa decyzyjnego
 plt.figure(figsize=(15, 10))
 plot_tree(final_clf, filled=True, feature_names=X.columns, class_names=final_clf.classes_)
 plt.title('Drzewo Decyzyjne')
-# plt.savefig("tree_plot.svg")
-plt.show()
+# plot_tree(): rysuje drzewo decyzyjne
+# filled=True: koloruje węzły drzewa
+# feature_names=X.columns: nazwy cech
+# class_names=final_clf.classes_: nazwy klas
 
-# Krok 8: Rysowanie wykresu błędu vs Głębokość drzewa i zapis do pliku SVG
+# Ewaluacja dokładności w zależności od głębokości drzewa decyzyjnego
 max_depths = range(1, 21)
 accuracies = []
 
+# Dla każdej głębokości drzewa, trenuj model, dokonaj predykcji i oblicz dokładność
 for depth in max_depths:
-    # Tworzenie klasyfikatora dla różnych głębokości drzewa
     clf = DecisionTreeClassifier(max_depth=depth, random_state=100)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
-    # Obliczanie dokładności dla każdej głębokości
     accuracy = accuracy_score(y_test, y_pred)
     accuracies.append(accuracy)
 
-# Krok 9: Rysowanie wykresu dokładności vs Głębokość Drzewa Decyzyjnego
+# Rysowanie wykresu dokładności w zależności od głębokości drzewa decyzyjnego
 plt.figure(figsize=(10, 6))
 plt.plot(max_depths, accuracies, marker='o')
 plt.title('Dokładność vs Głębokość Drzewa Decyzyjnego')
@@ -65,5 +94,7 @@ plt.ylabel('Dokładność')
 plt.grid(True)
 # plt.savefig("accuracy_vs_depth_plot.svg")
 plt.show()
-
-
+# plot(): rysuje wykres
+# max_depths: lista głębokości drzewa
+# accuracies: lista dokładności dla każdej głębokości
+# marker='o': oznacza punkty na wykresie
