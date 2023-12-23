@@ -4,9 +4,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix, classification_report
+from tkinter import filedialog
+import tkinter as tk
 
-# Wczytywanie danych z pliku CSV
-df = pd.read_csv("ttt.csv")
+# Okno dialogowe do wyboru pliku
+root = tk.Tk()
+root.withdraw()  # Ukrycie głównego okna
+
+# Wybór pliku za pomocą okna dialogowego
+file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pliki CSV", "*.csv")])
+
+# Wczytanie danych z wybranego pliku
+df = pd.read_csv(file_path)
 
 # Podział danych na cechy (X) i etykiety (y)
 X = df.drop('result', axis=1)
