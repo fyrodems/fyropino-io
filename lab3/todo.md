@@ -12,7 +12,7 @@
    4. [ ] wykres drzewa
    5. [ ] dokładne komentarze
    6. [ ] wnioski
-3. Third one
+3. Third one (mma???) abandoned???
    1. [ ] znaleźć zbiór
    2. [ ] 90%
    3. [ ] tkinter
@@ -20,5 +20,10 @@
    5. [ ] wykres drzewa
    6. [ ] dokładne komentarze
    7. [ ] wnioski
+4. hatespeech
+   1. dodanie automatycznego wybierania najlepszej głębokości 
+   2. rysowamie drzewa 
+   3. przycinanie go automatycznie 
+   4. zapisywanie do pliku
 
 ~~Diabetes - abandoned~~
