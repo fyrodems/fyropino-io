@@ -12,18 +12,19 @@
    4. [ ] wykres drzewa
    5. [ ] dokładne komentarze
    6. [ ] wnioski
-3. Third one (mma???) abandoned???
-   1. [ ] znaleźć zbiór
-   2. [ ] 90%
-   3. [ ] tkinter
-   4. [ ] wykres Dokładność vs Głębokość Drzewa Decyzyjnego
-   5. [ ] wykres drzewa
-   6. [ ] dokładne komentarze
-   7. [ ] wnioski
-4. hatespeech
-   1. dodanie automatycznego wybierania najlepszej głębokości 
-   2. rysowamie drzewa 
-   3. przycinanie go automatycznie 
-   4. zapisywanie do pliku
+3. hatespeech
+   1. [x] znaleźć zbiór
+   2. [x] 90%
+   3. [x] wykres Dokładność vs Głębokość Drzewa Decyzyjnego
+   4. [x] wykres drzewa
+   5. [x] dodanie automatycznego wybierania najlepszej głębokości 
+   6. [x] rysowanie drzewa 
+   7. [x] przycinanie drzewa automatycznie 
+   8. [ ] zapisywanie do pliku
+   9. [ ] tkinter
+   10. [ ] dokładne komentarze
+   11. [ ] wnioski 
 
-~~Diabetes - abandoned~~
+abandoned:
+~~Diabetes~~, 
+~~MMA~~
