@@ -1,4 +1,3 @@
-# Importowanie niezbędnych bibliotek
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
@@ -13,15 +12,20 @@ df = pd.read_csv('hatespeech.csv')
 X = df['tweet']
 y = df['class']
 
-# Podział danych na zbiór treningowy i testowy
+# Podział danych na zbiory treningowy i testowy z użyciem funkcji train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=100)
-# Komentarz 1: Dane zostają podzielone na zbiór treningowy i testowy w proporcji 80-20.
+# train_test_split dzieli dane na zbiór treningowy i testowy
+# X_train: cechy zbioru treningowego
+# X_test: cechy zbioru testowego
+# y_train: etykiety zbioru treningowego
+# y_test: etykiety zbioru testowego
+# test_size=0.2: 20% danych zostanie użyte jako zbiór testowy
 
 # Przygotowanie danych do modelu za pomocą CountVectorizer
 vectorizer = CountVectorizer()
 X_train_vectorized = vectorizer.fit_transform(X_train)
 X_test_vectorized = vectorizer.transform(X_test)
-# Komentarz 2: Tekst jest przekształcany na reprezentację liczbową za pomocą CountVectorizer.
+# Tekst jest przekształcany na reprezentację liczbową za pomocą CountVectorizer
 
 # Inicjalizacja listy głębokości drzewa do sprawdzenia
 depths = range(1, 51)
@@ -40,7 +44,7 @@ for depth in depths:
     # Obliczanie dokładności modelu
     accuracy = accuracy_score(y_test, y_pred)
     accuracies.append(accuracy)
-    # Komentarz 3: Model drzewa decyzyjnego jest trenowany i oceniany na danych testowych.
+    # Model drzewa decyzyjnego jest trenowany i oceniany na danych testowych
     print(f'Głębokość drzewa: {depth}, Dokładność: {accuracy}')
 
     # Aktualizacja najlepszej głębokości i dokładności
@@ -48,14 +52,17 @@ for depth in depths:
         best_accuracy = accuracy
         best_depth = depth
 
-# Rysowanie wykresu głębokości drzewa vs. dokładność
+# Rysowanie wykresu głębokości drzewa vs dokładność
 plt.figure(figsize=(20, 10))
 plt.plot(depths, accuracies, marker='o')
-plt.title('Głębokość drzewa vs. Dokładność')
+plt.title('Głębokość drzewa vs dokładność')
 plt.xlabel('Głębokość drzewa')
 plt.ylabel('Dokładność')
 plt.show()
-# Komentarz 4: Wykres przedstawia zależność dokładności modelu od głębokości drzewa.
+# Wykres przedstawia zależność dokładności modelu od głębokości drzewa
+
+# Ponieważ dla różnych danych optymalna głębokość drzewa była różna,
+# drzewo jest przycinane do głębokości repezentowenej przez best_depth
 
 # Wypisanie najlepszej głębokości drzewa i odpowiadającej dokładności
 print(f"Najlepsza głębokość drzewa: {best_depth}, Najlepsza dokładność: {best_accuracy}")
@@ -64,7 +71,8 @@ print(f"Najlepsza głębokość drzewa: {best_depth}, Najlepsza dokładność: {
 best_model = DecisionTreeClassifier(max_depth=best_depth)
 best_model.fit(X_train_vectorized, y_train)
 
+# Rysowanie ostatecznego drzewa decyzyjnego dla najlepszej głębokości
 plt.figure(figsize=(20, 10))
 plot_tree(best_model, filled=True, feature_names=vectorizer.get_feature_names_out())
 plt.show()
-# Komentarz 5: Rysowanie ostatecznego drzewa decyzyjnego dla najlepszej głębokości.
+
