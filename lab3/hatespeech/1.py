@@ -4,9 +4,18 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import CountVectorizer
+from tkinter import filedialog
+import tkinter as tk
 
-# Wczytanie danych z pliku CSV
-df = pd.read_csv('hatespeech.csv')
+# Okno dialogowe do wyboru pliku
+root = tk.Tk()
+root.withdraw()  # Ukrycie głównego okna
+
+# Wybór pliku za pomocą okna dialogowego
+file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pliki CSV", "*.csv")])
+
+# Wczytanie danych z wybranego pliku
+df = pd.read_csv(file_path)
 
 # Przetwarzanie tekstu - wybór kolumny 'tweet' jako danych wejściowych
 X = df['tweet']
@@ -58,11 +67,15 @@ plt.plot(depths, accuracies, marker='o')
 plt.title('Głębokość drzewa vs dokładność')
 plt.xlabel('Głębokość drzewa')
 plt.ylabel('Dokładność')
+
+# Zapisywanie wykresu do pliku SVG
+plt.savefig('tree_accuracy_plot.svg')
+
+# Wyświetlanie wykresu
 plt.show()
-# Wykres przedstawia zależność dokładności modelu od głębokości drzewa
 
 # Ponieważ dla różnych danych optymalna głębokość drzewa była różna,
-# drzewo jest przycinane do głębokości repezentowenej przez best_depth
+# drzewo jest przycinane do głębokości reprezentowanej przez best_depth
 
 # Wypisanie najlepszej głębokości drzewa i odpowiadającej dokładności
 print(f"Najlepsza głębokość drzewa: {best_depth}, Najlepsza dokładność: {best_accuracy}")
@@ -72,7 +85,12 @@ best_model = DecisionTreeClassifier(max_depth=best_depth)
 best_model.fit(X_train_vectorized, y_train)
 
 # Rysowanie ostatecznego drzewa decyzyjnego dla najlepszej głębokości
-plt.figure(figsize=(20, 10))
+plt.figure(figsize=(40, 20))
 plot_tree(best_model, filled=True, feature_names=vectorizer.get_feature_names_out())
-plt.show()
+plt.tight_layout()
 
+# Zapisywanie drzewa do pliku SVG
+plt.savefig('decision_tree.svg', format='svg', dpi=300)
+
+# Wyświetlanie drzewa
+plt.show()

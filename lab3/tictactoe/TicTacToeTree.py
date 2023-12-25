@@ -102,6 +102,9 @@ plt.title('Dokładność vs Głębokość Drzewa Decyzyjnego')
 plt.xlabel('Głębokość Drzewa')
 plt.ylabel('Dokładność')
 plt.grid(True)
+# Zapisanie wykresu do pliku
+plt.savefig("accuracy_vs_depth_plot.svg")
+plt.show()
 
 # Oczekujemy zobaczenia, jak dokładność modelu zmienia się wraz ze wzrostem głębokości drzewa.
 # Optymalna głębokość powinna być taka, która daje dobrą dokładność bez przetrenowania modelu.
@@ -109,5 +112,4 @@ plt.grid(True)
 # Patrząc na wykres, możemy zauważyć, że punkt, w którym dokładność jest odpowiednio wysoka i nie rośnie dalej równa się 10
 # Z tego względu w klasie DecisionTreeClassifier ustawiono max_depth na 10
 
-# plt.savefig("accuracy_vs_depth_plot.svg")
-plt.show()
+

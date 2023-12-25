@@ -20,9 +20,9 @@
    5. [x] dodanie automatycznego wybierania najlepszej głębokości 
    6. [x] rysowanie drzewa 
    7. [x] przycinanie drzewa automatycznie 
-   8. [ ] zapisywanie do pliku
+   8. [x] zapisywanie do pliku
    9. [ ] tkinter
-   10. [ ] dokładne komentarze
+   10. [x] dokładne komentarze
    11. [ ] wnioski 
 
 abandoned:
