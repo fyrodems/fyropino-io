@@ -25,6 +25,9 @@
    5. [ ] dokładne komentarze
    6. [ ] wnioski
 
+!!!!!!! zmienić wszystkie nazwy na polski
+i komentarze też
+
 abandoned:
 ~~Diabetes~~, 
 ~~MMA~~
