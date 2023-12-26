@@ -1,3 +1,11 @@
+# Poniższy skrypt służy do wykrywania oszustw
+# oraz identyfikowania potencjalnie fałszywych transakcji.
+#
+# Pobrany zbiór składał się z ponad 550 000 transakcji,
+# jednak został zmniejszony do ponad 170 000.
+#
+# Ze względu na dokładność i mnogość danych do uczenia dokładność skryptu oscyluje w okolicach 99%.
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
