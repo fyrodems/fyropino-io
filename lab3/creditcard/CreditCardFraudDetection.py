@@ -15,7 +15,7 @@ y = data['Class']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=100)
 
 # Inicjalizuj drzewo decyzyjne
-max_depth_values = range(1, 21)  # Zakres głębokości drzewa do przetestowania
+max_depth_values = range(1, 11)  # Zakres głębokości drzewa do przetestowania
 best_depth = 0
 best_accuracy = 0
 accuracies = []
@@ -48,12 +48,18 @@ plt.plot(max_depth_values, accuracies, marker='o')
 plt.title('Depth vs. Accuracy')
 plt.xlabel('Max Depth')
 plt.ylabel('Accuracy')
-plt.show()
+
+# Zapisz wykres do pliku SVG
+plt.savefig('depth_vs_accuracy_plot.svg')
 
 # Rysuj drzewo decyzyjne o najlepszej głębokości
 best_clf = DecisionTreeClassifier(random_state=100, max_depth=best_depth)
 best_clf.fit(X_train, y_train)
-plt.figure(figsize=(25, 15))
+plt.figure(figsize=(25, 10))
 plot_tree(best_clf, filled=True, feature_names=X.columns, class_names=['0', '1'])
-plt.title(f'Decision Tree (Max Depth = {best_depth})')
+
+# Zapisz drzewo do pliku SVG
+plt.savefig('decision_tree.svg')
+
+# Pokaż wykresy
 plt.show()
