@@ -3,9 +3,18 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.metrics import accuracy_score
+from tkinter import filedialog
+import tkinter as tk
 
-# Wczytaj dane z pliku CSV
-data = pd.read_csv('CreditCardFraudDetection.csv')
+# Okno dialogowe do wyboru pliku
+root = tk.Tk()
+root.withdraw()  # Ukrycie głównego okna
+
+# Wybór pliku za pomocą okna dialogowego
+file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pliki CSV", "*.csv")])
+
+# Wczytanie danych z wybranego pliku
+data = pd.read_csv(file_path)
 
 # Podziel dane na atrybuty (X) i etykiety (y)
 X = data.drop('Class', axis=1)
