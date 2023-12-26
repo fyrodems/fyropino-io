@@ -1,3 +1,18 @@
+# Poniższy skrypt służy do sprawdzenia, czy konfiguracja planszy w grze Kółko Krzyżyk
+# prowadzi do zakończenia rozgrywki poprzez zwycięstwo jednego z graczy, a nie remis.
+#
+#
+# Wybrany zbiór składa się z 958 wierszy.
+# Liczba wektorów wejściowych to 9, a wyjściowych - 1.
+# Kolumny reprezentują jedno z pola w grze Kółko Krzyżyk.
+# Pierwsza kolumna odpowiada lewemu górnemu rogowi,
+# druga środkowemu polu z góry, a trzecia prawemu górnemu rogowi, i tak dalej.
+# Wartości w kolumnach to: 0 - puste pole, 1 - krzyżyk, 2 - kółko.
+# Ostatnia kolumna zawiera informację, czy możliwe jest ukończenie gry.
+# Jej wartości to positive/negative.
+#
+# Dokładność skryptu oscyluje w okolicach 90%
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
