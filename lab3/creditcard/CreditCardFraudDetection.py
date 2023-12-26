@@ -8,7 +8,7 @@ import tkinter as tk
 
 # Okno dialogowe do wyboru pliku
 root = tk.Tk()
-root.withdraw()  # Ukrycie głównego okna
+root.withdraw()
 
 # Wybór pliku za pomocą okna dialogowego
 file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pliki CSV", "*.csv")])
@@ -16,59 +16,65 @@ file_path = filedialog.askopenfilename(title="Wybierz plik CSV", filetypes=[("Pl
 # Wczytanie danych z wybranego pliku
 data = pd.read_csv(file_path)
 
-# Podziel dane na atrybuty (X) i etykiety (y)
+# Podział danych na atrybuty (X) i etykiety (y)
 X = data.drop('Class', axis=1)
 y = data['Class']
 
-# Podziel dane na zestaw treningowy i testowy
+# Podział danych na zbiory treningowy i testowy z użyciem funkcji train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=100)
+# train_test_split dzieli dane na zbiór treningowy i testowy
+# X_train: cechy zbioru treningowego
+# X_test: cechy zbioru testowego
+# y_train: etykiety zbioru treningowego
+# y_test: etykiety zbioru testowego
+# test_size=0.2: 20% danych zostanie użyte jako zbiór testowy
 
-# Inicjalizuj drzewo decyzyjne
+# Przygotowanie drzewa decyzyjnego
 max_depth_values = range(1, 11)  # Zakres głębokości drzewa do przetestowania
-best_depth = 0
+best_depth = 0 # Lista do przechowywania dokładności dla różnych głębokości
 best_accuracy = 0
 accuracies = []
 
 for max_depth in max_depth_values:
-    # Trenuj drzewo decyzyjne na zestawie treningowym
+    # Trenowanie drzewa decyzyjnego na zestawie treningowym
     clf = DecisionTreeClassifier(random_state=100, max_depth=max_depth)
     clf.fit(X_train, y_train)
 
-    # Dokonaj predykcji na zestawie testowym
+    # Predykcja na zestawie testowym
     y_pred = clf.predict(X_test)
 
-    # Oceń skuteczność modelu
+    # Ocena skuteczności modelu
     accuracy = accuracy_score(y_test, y_pred)
     accuracies.append(accuracy)
 
-    # Aktualizuj najlepszą głębokość i dokładność
+    # Aktualizacja najlepszej głębokości i dokładności
     if accuracy > best_accuracy:
         best_accuracy = accuracy
         best_depth = max_depth
 
-    # Wydrukuj wyniki dla każdej głębokości
-    print(f'Max Depth: {max_depth}, Accuracy: {accuracy}')
+    # Printowanie wyników dla każdej głębokości
+    print(f'Głębokość: {max_depth}, Dokładność: {accuracy}')
 
 # Wypisz najlepszą głębokość i dokładność po zakończeniu pętli
-print(f'\nBest Depth: {best_depth}, Best Accuracy: {best_accuracy}')
+print(f'\nNajlepsza głębokość: {best_depth}, Najlepsza dokładność: {best_accuracy}')
 
-# Rysuj wykres głębokości drzewa vs. dokładność
+# Rysowanie wykresu głębokości drzewa vs dokładność
 plt.plot(max_depth_values, accuracies, marker='o')
-plt.title('Depth vs. Accuracy')
-plt.xlabel('Max Depth')
-plt.ylabel('Accuracy')
+plt.title('Głębokość drzewa vs dokładność')
+plt.xlabel('Głębokość drzewa')
+plt.ylabel('Dokładność')
 
-# Zapisz wykres do pliku SVG
-plt.savefig('depth_vs_accuracy_plot.svg')
+# Zapisywanie wykresu do pliku SVG
+plt.savefig('tree_accuracy_plot.svg')
 
-# Rysuj drzewo decyzyjne o najlepszej głębokości
+# Rysowanie ostatecznego drzewa decyzyjnego dla najlepszej głębokości
 best_clf = DecisionTreeClassifier(random_state=100, max_depth=best_depth)
 best_clf.fit(X_train, y_train)
 plt.figure(figsize=(25, 10))
 plot_tree(best_clf, filled=True, feature_names=X.columns, class_names=['0', '1'])
 
-# Zapisz drzewo do pliku SVG
+# Zapisywanie drzewa do pliku SVG
 plt.savefig('decision_tree.svg')
 
-# Pokaż wykresy
+# Wyświetlanie wykresów
 plt.show()
