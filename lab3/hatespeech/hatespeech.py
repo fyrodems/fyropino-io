@@ -1,3 +1,15 @@
+# Poniższy skrypt służy do sprawdzenia, czy przekazywany tekst (tweet)
+# zawiera mowię nienawiści.
+#
+# Tekst jest przekształcany na reprezentację liczbową za pomocą CountVectorizer.
+#
+# Ze względu na złożoność danych, na których się uczy, drzewo jest bardzo duże.
+# Z tego powodu zapisywanie jest do pliku svg, który najlepiej analizować
+# po otworzeniu w przeglądarce i po przybliżeniu.
+#
+# Dokładność skryptu oscyluje w okolicach 89%
+
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
