@@ -77,11 +77,13 @@ custom_animation.save('best_plot.gif', fps=4)
 
 import matplotlib.animation as animation
 
+
 # Funkcja do aktualizacji ramki animacji
 def update(frame, line, iterations_text):
     line.set_data(*best_optimizer.pos_history[:, :, frame])
     iterations_text.set_text(f'Iteracje: {frame + 1}')
     return line, iterations_text
+
 
 # Inicjalizacja wykresu
 fig, ax = plt.subplots()
@@ -97,11 +99,13 @@ iterations_text = ax.text(0.02, 0.95, '', transform=ax.transAxes)
 ax.set_xlim(-5, 5)
 ax.set_ylim(-5, 5)
 
+
 # Funkcja inicjalizująca animację
 def init():
     line.set_data([], [])
     iterations_text.set_text('')
     return line, iterations_text
+
 
 # Utworzenie animacji
 ani = animation.FuncAnimation(fig, update, frames=len(best_optimizer.pos_history[0, 0, :]),
@@ -109,4 +113,3 @@ ani = animation.FuncAnimation(fig, update, frames=len(best_optimizer.pos_history
 
 # Zapisz animację
 ani.save('trajectory_animation.gif', writer='imagemagick', fps=4)
-
