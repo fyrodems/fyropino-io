@@ -51,14 +51,14 @@ def run_experiment(num_particles, dimensions, options, iterations, experiment_na
     Image(url=f'plot_{experiment_name}.gif')
 
 
-# Eksperyment 1: Wpływ Liczby Cząstek
+# Eksperyment 1: Wpływ liczby cząstek
 options1 = {'c1': 1, 'c2': 2, 'w': 0.75}
 run_experiment(num_particles=500, dimensions=2, options=options1, iterations=100, experiment_name='experiment1')
 
-# Eksperyment 2: Wpływ Parametrów Algorytmu
-options2 = {'c1': 1.5, 'c2': 1.5, 'w': 0.9}
-run_experiment(num_particles=800, dimensions=2, options=options2, iterations=100, experiment_name='experiment2')
+# Eksperyment 2: Wpływ parametrów algorytmu i liczby cząstek
+options2 = {'c1': 1, 'c2': 2, 'w': 0.75}
+run_experiment(num_particles=1000, dimensions=2, options=options2, iterations=100, experiment_name='experiment2')
 
-# Eksperyment 3: Wpływ Inicjalizacji Cząstek
+# Eksperyment 3: Wpływ parametrów algorytmu bez zmiany liczby cząstek
 options3 = {'c1': 0.5, 'c2': 1.8, 'w': 0.5}
 run_experiment(num_particles=1000, dimensions=2, options=options3, iterations=100, experiment_name='experiment3')
